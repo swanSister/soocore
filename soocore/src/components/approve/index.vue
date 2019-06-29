@@ -6,7 +6,6 @@
 
 <script>
 export default {
-  name: '',
   data () {
     return {
      
@@ -15,6 +14,6 @@ export default {
 }
 </script>
 
-<style scoped>g
+<style scoped>
 
 </style>
