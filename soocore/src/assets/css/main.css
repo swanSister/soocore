@@ -1,0 +1,52 @@
+
+*{
+    box-sizing:border-box;
+}
+.flex{
+    display: flex;
+    flex:initial;
+    flex-direction: row;
+}
+.none{
+    flex:none;
+}
+.auto{
+    flex:auto;
+}
+.column{
+    flex-direction: column;
+}
+.justify-content-end{
+    justify-content: end;
+}
+.justify-content-center{
+    justify-content: center;
+}
+.justify-content-start{
+    justify-content: start;
+}
+.align-items-end{
+    align-items: flex-end;
+}
+.align-items-center{
+    align-items: center;
+}
+.align-items-start{
+    align-items: flex-start;
+}
+.button{
+    cursor:pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background:white;
+    border:2px solid #D8695E;
+    border-radius:2vh;
+}
+.button:hover{
+    background:#D8695E;
+    opacity:0.6;
+    color:#ffffff;
+}
+

@@ -35,6 +35,5 @@ export default new Router({
       name: 'request',
       component: Request
     }
-    
   ]
 })
