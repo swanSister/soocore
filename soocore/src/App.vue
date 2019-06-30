@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    aaaaaaaaaaaaa
     <div class="title">soocore</div>
     <router-view/>
   </div>
