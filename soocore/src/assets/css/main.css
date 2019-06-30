@@ -35,6 +35,7 @@
     align-items: flex-start;
 }
 .button{
+    font-size:2vh;
     cursor:pointer;
     display: flex;
     justify-content: center;
@@ -43,10 +44,28 @@
     background:white;
     border:2px solid #D8695E;
     border-radius:2vh;
-}
-.button:hover{
+    padding:0.5vh 2vh;
+    
+}   
+.button:after{
     background:#D8695E;
     opacity:0.6;
     color:#ffffff;
+}
+.red-button{
+    font-size:4vh;
+    cursor:pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background:#D8695E;
+    color:#ffffff;
+    border-radius:2vh;
+    padding:1vh 6vh;
+}
+.red-button::after{
+    opacity:0.6;
+    
 }
 

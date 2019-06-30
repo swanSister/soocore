@@ -7,10 +7,13 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import "@/assets/css/main.css"
-
+import VBar from 'v-bar'
+Vue.component('v-bar',VBar)
 export default {
-  name: 'App'
+  name: 'App',
+  
 }
 </script>
 
@@ -35,13 +38,15 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  font-size:2vh;
+  font-size:2.5vh;
+  height:100vh;
 }
 .title{
-  font-size:6vh;
+  font-size:8vh;
   font-weight: bold;
   color: #2D3642;
-  margin-top: 2vh;
-  margin-bottom:4vh;
+  height:15vh;
+  line-height: 15vh;
+  border-bottom:4px dashed rgba(33, 38, 46, 0.3);
 }
 </style>
