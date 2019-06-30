@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import "@/assets/css/main.css"
+
 export default {
   name: 'App'
 }
@@ -38,8 +40,8 @@ export default {
 .title{
   font-size:6vh;
   font-weight: bold;
-  color: #748EE8;
+  color: #2D3642;
   margin-top: 2vh;
-  margin-bottom:2vh;
+  margin-bottom:4vh;
 }
 </style>
