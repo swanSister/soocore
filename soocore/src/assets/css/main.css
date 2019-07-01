@@ -17,13 +17,13 @@
     flex-direction: column;
 }
 .justify-content-end{
-    justify-content: end;
+    justify-content:flex-end;
 }
 .justify-content-center{
     justify-content: center;
 }
 .justify-content-start{
-    justify-content: start;
+    justify-content: flex-start;
 }
 .align-items-end{
     align-items: flex-end;
@@ -44,7 +44,6 @@
     background:white;
     border:2px solid #D8695E;
     border-radius:2vh;
-    padding:0.5vh 2vh;
     
 }   
 .button:after{
@@ -62,7 +61,6 @@
     background:#D8695E;
     color:#ffffff;
     border-radius:2vh;
-    padding:1vh 6vh;
 }
 .red-button::after{
     opacity:0.6;
