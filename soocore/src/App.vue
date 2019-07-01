@@ -45,8 +45,8 @@ export default {
   font-size:8vh;
   font-weight: bold;
   color: #2D3642;
-  height:15vh;
-  line-height: 15vh;
+  height:12vh;
+  line-height: 12vh;
   border-bottom:4px dashed rgba(33, 38, 46, 0.3);
 }
 </style>
