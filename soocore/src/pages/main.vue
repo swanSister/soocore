@@ -1,11 +1,7 @@
 <template>
   <div>
-    <div class="x-flex auto">
-      <v-bar wrapper="wrapper"
-          vBar=""
-          vBarInternal=""
-          hBar=""
-          hBarInternal="">
+    <div class="nano" style="height:calc(100vh - 200px);">
+      <div class="nano-content">
         <div style="width:90%; margin-left:5%; margin-bottom:2vh;">
           <div class="flex none column justifh-content-center content" v-for="(i,index) of 10" :key="'main-list'+index"> 
             <div class="flex">
@@ -55,9 +51,9 @@
             </div>
           </div>
         </div>
-      </v-bar>
+      </div>
     </div>
-    <div class="flex none footer justify-content-center align-items-start">
+    <div class="flex none footer justify-content-center align-items-center">
        <div class="flex none red-button" style="padding:1vh 4vh; margin-top:1vh;">
           추가
       </div>
@@ -72,6 +68,10 @@ export default {
     return {
       
     }
+  },
+  mounted(){
+    
+    $(".nano").nanoScroller()
   }
 }
 </script>
