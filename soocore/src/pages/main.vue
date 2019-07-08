@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="nano" style="height:calc(100vh - 200px);">
+  <div class="flex auto column">
+    <div class="nano" style="height:74vh">
       <div class="nano-content">
         <div style="width:90%; margin-left:5%; margin-bottom:2vh;">
           <div class="flex none column justifh-content-center content" v-for="(i,index) of 10" :key="'main-list'+index"> 
@@ -54,7 +54,7 @@
       </div>
     </div>
     <div class="flex none footer justify-content-center align-items-center">
-       <div class="flex none red-button" style="padding:1vh 4vh; margin-top:1vh;">
+       <div class="flex auto red-button" style="padding:1vh 4vh;">
           추가
       </div>
     </div>
@@ -126,8 +126,9 @@ margin-right:1vh;
   color:#000000;
 }
 .footer{
+  padding:0 3vh;
   width:100%;
-  height:12vh;
+  margin-top:2vh;
 }
 
 </style>

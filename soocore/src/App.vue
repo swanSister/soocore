@@ -1,7 +1,9 @@
 <template>
-  <div id="app">
+  <div id="app" style="height:100%;">
     <div class="title">soocore</div>
-    <router-view/>
+    <div class="flex auto">
+      <router-view/>
+    </div>
   </div>
   
 </template>
@@ -39,14 +41,14 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   font-size:2.5vh;
-  height:100vh;
 }
 .title{
   font-size:8vh;
   font-weight: bold;
   color: #2D3642;
   height:12vh;
-  line-height: 12vh;
-  border-bottom:4px dashed rgba(33, 38, 46, 0.3);
+  line-height: 9.5vh;
+  box-sizing: border-box;
+  border-bottom:0.5vh dashed rgba(33, 38, 46, 0.3);
 }
 </style>
