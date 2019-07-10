@@ -5,7 +5,7 @@ import Main from '@/pages/main'
 import Invite from '@/pages/invite'
 import Approve from '@/pages/approve'
 import Request from '@/pages/request'
-import Add from '@/pages/Add'
+import Add from '@/pages/add'
 Vue.use(Router)
 
 export default new Router({
