@@ -11,10 +11,14 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "express": "^4.17.1",
+    "forever": "^1.0.0",
     "http-server": "^0.11.1",
     "jquery": "^3.4.1",
     "nanoscroller": "^0.8.7",
+    "pug": "^2.0.4",
     "remove-trailing-spaces": "^1.0.7",
+    "socket.io": "^2.2.0",
     "sys": "0.0.1",
     "v-bar": "^3.0.0",
     "vue": "^2.5.2",
