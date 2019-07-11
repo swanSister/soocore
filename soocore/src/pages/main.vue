@@ -22,8 +22,8 @@
               </div>
             </div>
 
-            <div class="flex auto align-items-center" style="margin-top:4vw;">
-               <div class="flex none column justify-content-start" style="font-size:4vw;">
+            <div class="flex auto align-items-center" style="margin-top:5vw;">
+               <div class="flex none column justify-content-start" style="font-size:5vw;">
                 <div class="flex auto justify-content-start">
                   <div class="flex none sub-text">
                     점수
@@ -33,7 +33,7 @@
                   달성 보상
                 </div>
               </div>
-              <div class="flex auto column justify-content-end" style="font-size:4vw;">
+              <div class="flex auto column justify-content-end" style="font-size:5vw;">
                 <div class="flex auto justify-content-end">
                   <div class="flex none sub-text" :style="{
                   color:'#D8695E', 
@@ -111,13 +111,14 @@ margin-right:2vw;
   border: 2px dotted #D8695E;
 }
 .sub-text{
-  font-size:3vw;
+  font-size:4vw;
   height:4vw;
   line-height: 4vw;
+  margin-bottom:1vw;
   color:#595959;
 }
 .main-text{
-  font-size:4vw;
+  font-size:5vw;
   height:5vw;
   line-height: 5vw;
   color:#000000;
