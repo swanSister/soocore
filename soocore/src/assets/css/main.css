@@ -51,7 +51,6 @@ body {
     background:white;
     border:2px solid #D8695E;
     border-radius:4vw;
-    
 }   
 .button:after{
     background:#D8695E;
@@ -71,9 +70,7 @@ body {
 }
 .red-button::after{
     opacity:0.6;
-    
 }
-
 .title{
     font-size:16vw;
     font-weight: bold;
@@ -85,11 +82,11 @@ body {
   }
 
 .sub-title{
-    font-size:6vw;
+    font-size:10vw;
     font-weight: bold;
     color: #2D3642;
-    height:12vw;
-    line-height: 10vw;
+    height:16vw;
+    line-height: 14vw;
     box-sizing: border-box;
     border-bottom:1vw dashed rgba(33, 38, 46, 0.3);
   }
