@@ -1,8 +1,7 @@
 <template>
   <div id="app" style="height:100%; margin:0; padding:0;">
-    <router-view style="height:100%;"/>
+    <router-view style="height:100%; width:100%;"/>
   </div>
-  
 </template>
 
 <script>
@@ -37,6 +36,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  font-size:4vw;
+  font-size:5vw;
 }
 </style>

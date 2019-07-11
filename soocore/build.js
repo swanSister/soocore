@@ -23,7 +23,6 @@ function startBuild(){
       })
     })
 }
-
 function runExec(command, message,cb){
   setTimeout(function(){
     exec(command, (error, stdout, stderr) => {
