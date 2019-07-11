@@ -3,7 +3,7 @@
     <div class="title">soocore</div>
     <div class="nano" style="height:calc(100% - 38vw);">
       <div class="nano-content">
-        <div style="width:90%; margin-left:5%; margin-bottom:4vw;">
+        <div style="margin:0 auto; width:90%; margin-bottom:4vw;">
           <div class="flex none column justifh-content-center content" v-for="(i,index) of 10" :key="'main-list'+index"> 
             <div class="flex">
               <div class="flex auto justify-content-start align-items-center">
@@ -55,7 +55,7 @@
       </div>
     </div>
     <div @click="$router.push('add')" class="flex none footer justify-content-center align-items-center">
-       <div class="flex auto red-button" style="padding:2vw 8vw;">
+       <div class="flex auto red-button" style="width:90%; padding:2vw 8vw;">
           추가
       </div>
     </div>
