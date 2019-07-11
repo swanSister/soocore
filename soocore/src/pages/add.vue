@@ -116,6 +116,9 @@ export default {
   color:#ffffff;
   margin-right:2vw;
 }
+.circle:hover{
+  cursor:auto;
+}
 .score-selector-bg{
   width:90%;
   margin-left:5%;
@@ -140,7 +143,7 @@ export default {
   box-shadow: 1px 1px 3px 0 rgba(33, 38, 46, 0.4);
 }
 .score-selector:hover{
-  opacity:.7;
+  cursor:auto;
 }
 .score-selector-text{
   position: absolute;

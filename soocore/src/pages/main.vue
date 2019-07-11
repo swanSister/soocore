@@ -55,7 +55,7 @@
       </div>
     </div>
     <div @click="$router.push('add')" class="flex none footer justify-content-center align-items-center">
-       <div class="flex auto red-button" style="width:90%; padding:2vw 8vw;">
+       <div class="flex auto red-button align-items-center" style="width:90%; padding:2vw 0;">
           추가
       </div>
     </div>
