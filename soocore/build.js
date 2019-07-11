@@ -15,16 +15,11 @@ app.get('/build', function(req, res) {
 function startBuild(){
     runExec('forever stop soocore', 'stop server...', function(){
       runExec('git pull origin master', 'git pull...', function(){
-        runExec('cyyworld71@gmail.com', 'git login...', function(){
-          runExec('dbwjd12!@', 'git login...', function(){
-            runExec('npm run build', 'build...', function(){
-              runExec('forever start--uid "soocore" deploy.js', 'complete!!', function(){
-                
-              })
-            })
+        runExec('npm run build', 'build...', function(){
+          runExec('forever start--uid "soocore" deploy.js', 'complete!!', function(){
+
           })
         })
-       
       })
     })
 }
