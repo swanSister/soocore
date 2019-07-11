@@ -1,7 +1,6 @@
 <template>
-  <div id="app">
-    <div class="title">soocore</div>
-    <router-view/>
+  <div id="app" style="height:100%; margin:0; padding:0;">
+    <router-view style="height:100%;"/>
   </div>
   
 </template>
@@ -38,15 +37,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  font-size:2.5vh;
-  height:100vh;
-}
-.title{
-  font-size:8vh;
-  font-weight: bold;
-  color: #2D3642;
-  height:15vh;
-  line-height: 15vh;
-  border-bottom:4px dashed rgba(33, 38, 46, 0.3);
+  font-size:4vw;
 }
 </style>
