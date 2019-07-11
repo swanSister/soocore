@@ -57,7 +57,7 @@ export default {
       e.stopPropagation()
       if(this.isMouseDown){
         if(!this.lastTimeStamp || (e.timeStamp - this.lastTimeStamp) > this.timeThreshold){
-          let x = e.clientX - this.rect.x
+          let x = (e.clientX || e.touches[0].clientX) - this.rect.x
           let left = parseInt(x*100/this.rect.width)
           left = left < 0 ? 0 : left > 100 ? 100 : left 
           this.$refs.scoreSelector.style.left= `${left}%`
@@ -73,7 +73,6 @@ export default {
           if(target.id && target.id == "scoreSelector"){
             this.rect = this.$refs.scoreSelectorBg.getBoundingClientRect()
             this.lastTimeStamp = e.timeStamp
-            this.startPageX = e.pageX
             this.isMouseDown = true
             break
           }
@@ -83,7 +82,6 @@ export default {
     onMouseUp(e){
       let that = this
       setTimeout(function(){
-        that.startPageX = 0
         that.isMouseDown = false
         that.lastTimeStamp = 0
       },50)
