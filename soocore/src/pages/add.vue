@@ -12,7 +12,7 @@
       </div>
       <div class="flex auto justify-content-center">
         <div class="flex none justify-content-center align-items-center circle" :style="{
-          background:role == 2 ? '#D8695E' : '#D9D9D9'
+          background:role == 2 ? '#F2D677' : '#D9D9D9'
         }" @click="role=2">을</div>
       </div>
     </div>
@@ -22,9 +22,9 @@
     <div class="flex justify-content-start score-selector-bg">
       <div class="score-selector">
       </div>
-      <div class="flex align-items-center justify-content-center score-selector-text" style="font-size:1.5vh; left:0;">1000</div>
+      <div class="flex align-items-center justify-content-center score-selector-text" style="font-size:3vw; left:0;">1000</div>
       <div class="flex align-items-center justify-content-center score-selector-text">50000</div>
-      <div class="flex align-items-center justify-content-center score-selector-text" style="font-size:1.5vh; left:100%;">100000</div>
+      <div class="flex align-items-center justify-content-center score-selector-text" style="font-size:3vw; left:100%;">100000</div>
     </div>
   </div>
 
@@ -51,38 +51,39 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .content{
-  margin-top:2vh;
-  padding:1vh;
+  margin: 4vw 4vw 0vw 4vw;
+  padding:2vw;
   box-shadow: 0 0 6px 0 rgba(33, 38, 46, 0.3);
-  border-radius:1vh;
+  border-radius:2vw;
 }
 .circle{
   cursor: pointer;
-  width:8vh;
-  height:8vh;
-  border-radius: 2vh;
+  width:16vw;
+  height:16vw;
+  font-size:8vw;
+  border-radius: 4vw;
   color:#ffffff;
-  margin-right:1vh;
+  margin-right:2vw;
 }
 .score-selector-bg{
   width:65%;
   margin-right:5%;
-  height:3vh;
+  height:6vw;
   background:#D9D9D9;
-  border-radius: 1vh;
+  border-radius: 2vw;
   position: relative;
-  margin-bottom: 3vh;
+  margin-bottom: 6vw;
 }
 .score-selector{
   position: absolute;
-  border:solid 0.4vh #D8695E;
+  border:solid 0.8vw #D8695E;
   transform: translate(-50%,0);
   left:50%;
   top:0;
   width:5%;
   height:100%;
   background:#F2D677;
-  border-radius: 1vh;
+  border-radius: 2vw;
   cursor: pointer;
 }
 .score-selector:hover{
@@ -91,24 +92,24 @@ export default {
 }
 .score-selector-text{
   position: absolute;
-  width:20vh;
-  top:3.5vh;
+  width:40vw;
+  top:7vw;
   left:50%;
-  height:3vh;
+  height:6vw;
   transform: translate(-50%,0);
   color:#595959;
 }
 textarea{
-	border-radius: 1vh;
+	border-radius: 2vw;
 	outline: none;
-	padding: 1vh;
-	font-size: 2vh;
+	padding: 2vw;
+	font-size: 4vw;
 	color: #595959;
-  border: solid 0.4vh #D9D9D9;
+  border: solid 0.8vw #D9D9D9;
   font-weight: bold;
 }
 input:focus, textarea:focus{
-	border: solid 0.4vh #D8695E;	
+	border: solid 0.8vw #D8695E;	
 }
 textarea{
 	resize: none; 

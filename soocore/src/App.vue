@@ -1,8 +1,6 @@
 <template>
-  <div id="app" style="height:100%;">
-    <div class="flex auto">
-      <router-view/>
-    </div>
+  <div id="app" style="height:100%; margin:0; padding:0;">
+    <router-view style="height:100%;"/>
   </div>
   
 </template>
@@ -39,6 +37,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  font-size:2.5vh;
+  font-size:4vw;
 }
 </style>

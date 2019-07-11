@@ -2,6 +2,10 @@
 *{
     box-sizing:border-box;
 }
+html, 
+body {
+    height: 100%;
+}
 .flex{
     display: flex;
     flex:initial;
@@ -35,7 +39,7 @@
     align-items: flex-start;
 }
 .button{
-    font-size:2vh;
+    font-size:4vw;
     cursor:pointer;
     display: flex;
     justify-content: center;
@@ -43,7 +47,7 @@
     align-content: center;
     background:white;
     border:2px solid #D8695E;
-    border-radius:2vh;
+    border-radius:4vw;
     
 }   
 .button:after{
@@ -52,7 +56,7 @@
     color:#ffffff;
 }
 .red-button{
-    font-size:4vh;
+    font-size:8vw;
     cursor:pointer;
     display: flex;
     justify-content: center;
@@ -60,7 +64,7 @@
     align-content: center;
     background:#D8695E;
     color:#ffffff;
-    border-radius:2vh;
+    border-radius:4vw;
 }
 .red-button::after{
     opacity:0.6;
@@ -68,22 +72,22 @@
 }
 
 .title{
-    font-size:8vh;
+    font-size:16vw;
     font-weight: bold;
     color: #2D3642;
-    height:12vh;
-    line-height: 9.5vh;
+    height:22vw;
+    line-height: 16vw;
     box-sizing: border-box;
-    border-bottom:0.5vh dashed rgba(33, 38, 46, 0.3);
+    border-bottom:1vw dashed rgba(33, 38, 46, 0.3);
   }
 
 .sub-title{
-    font-size:4vh;
+    font-size:6vw;
     font-weight: bold;
     color: #2D3642;
-    height:8vh;
-    line-height: 7vh;
+    height:12vw;
+    line-height: 10vw;
     box-sizing: border-box;
-    border-bottom:0.5vh dashed rgba(33, 38, 46, 0.3);
+    border-bottom:1vw dashed rgba(33, 38, 46, 0.3);
   }
 
