@@ -13,10 +13,10 @@ app.get('/build', function(req, res) {
   startBuild()
 });
 function startBuild(){
-    runExec('forever stop soocore', 'stop server...', function(){
-      runExec('git pull origin master', 'git pull...', function(){
-        runExec('npm run build', 'build...', function(){
-          runExec('forever start--uid "soocore" deploy.js', 'complete!!', function(){
+    runExec('forever stop soocore', 'git pull...', function(){
+      runExec('git pull origin master', 'building...', function(){
+        runExec('npm run build', 'deploy...', function(){
+          runExec('forever start --uid "soocore" deploy.js', 'complete!!', function(){
 
           })
         })
@@ -29,9 +29,8 @@ function runExec(command, message,cb){
     exec(command, (error, stdout, stderr) => {
       if (error) {
         io.emit('data', 'error : ' + error);
-      }else{
-        io.emit('data', message);
       }
+      io.emit('data', message);
       if(cb){
         cb()
       }
