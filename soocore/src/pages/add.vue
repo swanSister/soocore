@@ -17,7 +17,7 @@
       </div>
     </div>
   </div>
-  <div class="flex none content" style="position: relative;">
+  <div class="flex column none content" style="position: relative;">
     <div class="flex auto justify-content-center align-items-center"> 목표 점수</div>
     <div class="flex justify-content-start score-selector-bg">
       <div class="score-selector">
@@ -66,8 +66,8 @@ export default {
   margin-right:2vw;
 }
 .score-selector-bg{
-  width:65%;
-  margin-right:5%;
+  width:80%;
+  margin-right:10%;
   height:6vw;
   background:#D9D9D9;
   border-radius: 2vw;
