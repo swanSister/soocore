@@ -7,6 +7,7 @@
 <script>
 import Vue from 'vue'
 import "@/assets/css/main.css"
+import "@/assets/css/fontello.css"
 import VBar from 'v-bar'
 Vue.component('v-bar',VBar)
 export default {

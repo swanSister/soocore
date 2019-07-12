@@ -56,7 +56,7 @@
           </div>
           <div class="flex none" style="position:relative; width:50%; border-radius:2vw;">
             <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); color:#595959; font-size:4vw; opacity:0.5;">서명</div>
-            <img @click="isSigniturePopupShow=!isSigniturePopupShow" :src="signitureData" class="flex align-items-center " style="cursor:pointer; width:100%;"/>
+            <img @click="isSigniturePopupShow=!isSigniturePopupShow" :src="signitureData" class="flex align-items-center " style=" width:100%;"/>
           </div>
         </div>
 
