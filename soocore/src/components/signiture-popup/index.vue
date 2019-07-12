@@ -51,7 +51,7 @@ export default {
           if(!this.lastTimeStamp || (e.timeStamp - this.lastTimeStamp) > this.timeThreshold){
             this.ctx.moveTo(this.beforeX, this.beforeY);
             this.ctx.lineTo(x, y);
-            this.ctx.lineWidth=10
+            this.ctx.lineWidth=2
             this.ctx.stroke()
           }
         }
