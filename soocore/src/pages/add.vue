@@ -54,7 +54,7 @@
           <div class="flex none" style="width:30%;margin-left:4vw;">
            김민수
           </div>
-          <div class="flex none" style="position:relative; width:50%; border:1px solid #595959; border-radius:2vw;">
+          <div class="flex none" style="position:relative; width:50%; border-radius:2vw;">
             <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); color:#595959; font-size:4vw; opacity:0.5;">서명</div>
             <img @click="isSigniturePopupShow=!isSigniturePopupShow" :src="signitureData" class="flex align-items-center " style="cursor:pointer; width:100%;"/>
           </div>
