@@ -4,14 +4,14 @@
     <div class="nano" style="height:calc(100% - 38vw);">
       <div class="nano-content">
         <div style="margin:0 auto; width:90%; margin-bottom:4vw;">
-          <div class="flex none column justifh-content-center content" v-for="(i,index) of 10" :key="'main-list'+index"> 
+          <div @click="$router.push('detail')" class="flex none column justifh-content-center content" v-for="(i,index) of 10" :key="'main-list'+index"> 
             <div class="flex">
               <div class="flex auto justify-content-start align-items-center">
                 <div class="flex none circle justify-content-center align-items-center">갑</div>
                 <div>김민수{{i}}</div>
               </div>
               <div class="flex auto justify-content-end align-items-center">
-                <div class="flex none circle justify-content-center align-items-center">을</div>
+                <div class="flex none circle justify-content-center align-items-center" style="background:#F2D677;">을</div>
                 <div>정유정{{i}}</div>
               </div>
             </div>
@@ -25,27 +25,27 @@
             <div class="flex auto align-items-center" style="margin-top:5vw;">
                <div class="flex none column justify-content-start" style="font-size:5vw;">
                 <div class="flex auto justify-content-start">
-                  <div class="flex none sub-text">
+                  <div class="flex none score-text">
                     점수
                   </div>
                 </div>
-                <div class="flex none align-items-center main-text">
+                <div class="flex none align-items-center goal-text">
                   달성 보상
                 </div>
               </div>
               <div class="flex auto column justify-content-end" style="font-size:5vw;">
                 <div class="flex auto justify-content-end">
-                  <div class="flex none sub-text" :style="{
+                  <div class="flex none score-text" :style="{
                   color:'#D8695E', 
                   fontWeight:'bold'
                   }">
                     7000/
                   </div>
-                  <div class="flex none sub-text">
+                  <div class="flex none score-text">
                     10000
                   </div>
                 </div>
-                <div class="flex auto align-items-center justify-content-end main-text">
+                <div class="flex auto align-items-center justify-content-end goal-text">
                   디지몬 5만원 교환권
                 </div>
               </div>
@@ -110,14 +110,14 @@ margin-right:2vw;
   border-radius: 2vw;
   border: 2px dotted #D8695E;
 }
-.sub-text{
+.score-text{
   font-size:4vw;
   height:4vw;
   line-height: 4vw;
   margin-bottom:1vw;
   color:#595959;
 }
-.main-text{
+.goal-text{
   font-size:5vw;
   height:5vw;
   line-height: 5vw;
