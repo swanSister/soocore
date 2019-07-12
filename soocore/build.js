@@ -16,7 +16,7 @@ function startBuild(){
     runExec('forever stop soocore', 'git pull...', function(){
       runExec('git pull origin master', 'building...', function(){
         runExec('npm run build', 'deploy...', function(){
-          runExec('forever start --uid "soocore" deploy.js', 'complete!!', function(){
+          runExec('forever start -a --uid "soocore" deploy.js', 'complete!!', function(){
 
           })
         })
