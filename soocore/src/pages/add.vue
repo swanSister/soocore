@@ -1,10 +1,10 @@
 
 <template>
 <div class="flex auto column">
+  <div class="sub-title">추가</div>
   <div class="nano">
     <div class="nano-content">
-      <div class="sub-title">추가</div>
-      <div class="flex none content column" >
+      <div class="flex none content column">
         <div class="flex none justify-content-start align-items-center add-title"> 나의 역할</div>
         <div class="flex" style="width:70%; margin:0 auto;">
           <div class="flex auto justify-content-center">
@@ -27,7 +27,7 @@
         class="flex justify-content-start score-selector-bg">
           <div ref="scoreSelector" id="scoreSelector" class="score-selector">
           </div>
-          <div class="flex align-items-center justify-content-center score-selector-text" style="font-size:3vw; left:3%;">1,000</div>
+          <div class="flex align-items-center justify-content-center score-selector-text" style="font-size:3vw; left:3%;">5,000</div>
           <div class="flex align-items-center justify-content-center score-selector-text goal-score">{{goalScore}} 점</div>
           <div class="flex align-items-center justify-content-center score-selector-text" style="font-size:3vw; left:96%;">100,000</div>
         </div>
@@ -38,15 +38,49 @@
           <textarea style="width:100%;" placeholder="달성 보상을 입력해 주세요." type="text" rows="4" cols="30"/>
         </div>
       </div>
+      
+      <div v-if="!signitureData" @click="isSigniturePopupShow=!isSigniturePopupShow" class="flex none footer justify-content-center align-items-center">
+        <div class="flex auto red-button align-items-center" style="margin:4vw;width:90%; padding:2vw 0;">
+            서명
+        </div>
+      </div>
+      <div v-else class="flex content column" style="box-shadow:none;">
+        <div class="flex none align-items-center" style="margin:4vw;">
+          <div class="flex none circle-small justify-content-center align-items-center" :style="{
+              background:role == 1 ? '#D8695E' : '#F2D677'
+            }">
+           {{role==1 ? '갑' : '을'}}
+          </div>
+          <div class="flex none" style="width:30%;margin-left:4vw;">
+           김민수
+          </div>
+          <div class="flex none" style="position:relative; width:50%; border:1px solid #595959; border-radius:2vw;">
+            <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); color:#595959; font-size:4vw; opacity:0.5;">서명</div>
+            <img @click="isSigniturePopupShow=!isSigniturePopupShow" :src="signitureData" class="flex align-items-center " style="cursor:pointer; width:100%;"/>
+          </div>
+        </div>
+
+        <div class="flex none footer justify-content-center align-items-center">
+          <div class="flex auto red-button align-items-center" style="margin:4vw;width:90%; padding:2vw 0;">
+              초대하기
+          </div>
+        </div>
+      </div>
    </div>
   </div>
+  <div v-if="isSigniturePopupShow" class="popup-bg" @click="isSigniturePopupShow=false"></div>
+  <signiture-popup v-if="isSigniturePopupShow" @confirm="onConfirmSignitur" />
 </div>
 
 </template>
 
 <script>
+import SigniturePopup from '@/components/signiture-popup'
 export default {
   name: 'add',
+  components:{
+    SigniturePopup
+  },
   data () {
     return {
       role:1, //1:갑, 2:을
@@ -55,6 +89,8 @@ export default {
       timeThreshold:50,
       rect:{},
       goalScore:50000,
+      isSigniturePopupShow:false,
+      signitureData:null,
     }
   },
   methods:{
@@ -64,7 +100,9 @@ export default {
         if(!this.lastTimeStamp || (e.timeStamp - this.lastTimeStamp) > this.timeThreshold){
           let x = (e.clientX || e.touches[0].clientX) - this.rect.x
           let left = parseInt(x*100/this.rect.width)
-          left = left < 0 ? 0 : left > 100 ? 100 : left 
+          left = left < 0 ? 0 : left > 100 ? 100 : left
+          left += 5
+          left -= left%5
           this.$refs.scoreSelector.style.left= `${left}%`
           this.goalScore = 1000*left
         }
@@ -90,6 +128,10 @@ export default {
         that.isMouseDown = false
         that.lastTimeStamp = 0
       },50)
+    },
+    onConfirmSignitur(data){
+      this.signitureData = data
+      this.isSigniturePopupShow = false
     }
   },
   mounted(){
@@ -105,8 +147,8 @@ export default {
 <style scoped>
 .content{
   width:92%;
-  margin:0 auto;
   margin-top:4vw;
+  margin-left:4%;
   padding-bottom:4vw;
   box-shadow: 0 0 6px 0 rgba(33, 38, 46, 0.3);
   border-radius:2vw;
@@ -120,6 +162,15 @@ export default {
   border-radius: 4vw;
   color:#ffffff;
   margin-right:2vw;
+}
+.circle-small{
+  cursor: pointer;
+  width:10vw;
+  height:10vw;
+  font-size:5vw;
+  border-radius: 2vw;
+  color:#ffffff;
+  margin-left:4vw;
 }
 .circle:hover{
   cursor:auto;
