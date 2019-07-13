@@ -1,11 +1,7 @@
 
 <template>
 <div class="flex auto column">
-  <div class="flex none footer justify-content-center align-items-center">
-    <div class="flex auto red-button align-items-center" style="margin:4vw 4vw 0 4vw; width:90%; padding:2vw 0;">
-        점수 등록
-    </div>
-  </div>
+ <sub-header title="상세"/>
   <div class="nano">
     <div class="nano-content">
       <div class="flex none content column">
@@ -95,7 +91,7 @@
                 <div class="flex justify-content-start score-table-item" style="text-align:left; padding:2vw;">
                   쑤 나 10 10 큐브 사주라 제발 승인해주세요 쑤느님
                 </div>
-                <div class="flex justify-content-center score-table-item">
+                <div class="flex justify-content-center score-table-item clickable">
                   <div class="flex none justify-content-center align-items-center" style="border-radius:3vw; width:10vw; height:10vw; background:#D8695E;">
                     <div class="flex icon-ok" style="color:#ffffff; font-size:5vw;"></div>
                   </div>
@@ -116,6 +112,11 @@
         </div>
       </div>
    </div>
+  </div>
+  <div class="flex none footer justify-content-center align-items-center">
+      <div class="flex auto red-button align-items-center" style="width:90%; padding:2vw 0;">
+        점수 등록
+    </div>
   </div>
 </div>
 

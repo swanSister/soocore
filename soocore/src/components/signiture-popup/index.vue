@@ -26,7 +26,7 @@ export default {
       beforeX:null,
       beforeY:null,
       lastTimeStamp:null,
-      timeThreshold:20,
+      timeThreshold:10,
       isMouseDown:false,
       ctx:null,
       canvasRect:null,
@@ -42,6 +42,8 @@ export default {
       let target = e.target
       this.lastTimeStamp = e.timeStamp
       this.isMouseDown = true
+      this.beforeX = (e.clientX || e.touches[0].clientX) - this.canvasRect.x
+      this.beforeY = (e.clientY || e.touches[0].clientY) - this.canvasRect.y
     },
     onMouseMove(e){
       if(this.isMouseDown){
