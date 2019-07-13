@@ -8,8 +8,8 @@
 import Vue from 'vue'
 import "@/assets/css/main.css"
 import "@/assets/css/fontello.css"
-import VBar from 'v-bar'
-Vue.component('v-bar',VBar)
+import SubHeader from "@/components/sub-header"
+Vue.component('sub-header',SubHeader)
 export default {
   name: 'App',
   
@@ -33,7 +33,7 @@ export default {
        url("assets/fonts/BMJUA.ttf") format("truetype");
 }
 #app {
-  font-family:BMHANNA;
+  font-family:BMJUA;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

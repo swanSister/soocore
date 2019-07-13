@@ -86,6 +86,9 @@ export default {
   &:last-child{
     margin-bottom:12vw;
   }
+  &:hover{
+    background:rgba(33, 38, 46, 0.1);
+  }
   padding:6vw 4vw;
 }
 .circle{
@@ -122,11 +125,6 @@ margin-right:2vw;
   height:5vw;
   line-height: 5vw;
   color:#000000;
-}
-.footer{
-  height:16vw;
-  padding:0 6vw;
-  width:100%;
 }
 
 </style>

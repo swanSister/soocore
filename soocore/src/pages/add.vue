@@ -1,7 +1,7 @@
 
 <template>
 <div class="flex auto column">
-  <div class="sub-title">추가</div>
+ <sub-header title="추가"/>
   <div class="nano">
     <div class="nano-content">
       <div class="flex none content column">
@@ -54,9 +54,9 @@
           <div class="flex none" style="width:30%;margin-left:4vw;">
            김민수
           </div>
-          <div class="flex none" style="position:relative; width:50%; border-radius:2vw;">
+          <div @click="isSigniturePopupShow=!isSigniturePopupShow" class="flex none" style="position:relative; width:50%; border-radius:2vw;">
             <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); color:#595959; font-size:4vw; opacity:0.5;">서명</div>
-            <img @click="isSigniturePopupShow=!isSigniturePopupShow" :src="signitureData" class="flex align-items-center " style=" width:100%;"/>
+            <img :src="signitureData" class="flex align-items-center " style=" width:100%;"/>
           </div>
         </div>
 
@@ -173,7 +173,7 @@ export default {
   margin-left:4vw;
 }
 .circle:hover{
-  cursor:auto;
+  opacity:.7;
 }
 .score-selector-bg{
   width:90%;

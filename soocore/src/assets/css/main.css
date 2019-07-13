@@ -42,22 +42,7 @@ body {
 .align-items-start{
     align-items: flex-start;
 }
-.button{
-    font-size:4vw;
-    cursor:pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    background:white;
-    border:2px solid #D8695E;
-    border-radius:4vw;
-}   
-.button:after{
-    background:#D8695E;
-    opacity:0.6;
-    color:#ffffff;
-}
+
 .red-button{
     font-size:8vw;
     cursor:pointer;
@@ -69,8 +54,8 @@ body {
     color:#ffffff;
     border-radius:4vw;
 }
-.red-button::after{
-    opacity:0.6;
+.red-button:hover{
+    opacity:.7;
 }
 .title{
     font-size:16vw;
@@ -98,5 +83,13 @@ body {
     left:0;
     top:0;
     background:rgba(33, 38, 46, 0.5);
+  }
+  .clickable :hover{
+    opacity:.7;
+  }
+  .footer{
+    height:16vw;
+    padding:0 6vw;
+    width:100%;
   }
 
