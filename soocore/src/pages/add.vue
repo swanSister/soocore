@@ -172,7 +172,7 @@ export default {
   color:#ffffff;
   margin-left:4vw;
 }
-.circle:hover{
+.circle:active{
   opacity:.7;
 }
 .score-selector-bg{
@@ -198,7 +198,7 @@ export default {
   cursor: pointer;
   box-shadow: 1px 1px 3px 0 rgba(33, 38, 46, 0.4);
 }
-.score-selector:hover{
+.score-selector:after{
   cursor:auto;
 }
 .score-selector-text{
