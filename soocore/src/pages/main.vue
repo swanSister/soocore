@@ -86,7 +86,7 @@ export default {
   &:last-child{
     margin-bottom:12vw;
   }
-  &:hover{
+  &:active{
     background:rgba(33, 38, 46, 0.1);
   }
   padding:6vw 4vw;

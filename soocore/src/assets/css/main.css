@@ -54,7 +54,7 @@ body {
     color:#ffffff;
     border-radius:4vw;
 }
-.red-button:hover{
+.red-button:active{
     opacity:.7;
 }
 .title{
@@ -84,7 +84,7 @@ body {
     top:0;
     background:rgba(33, 38, 46, 0.5);
   }
-  .clickable :hover{
+  .clickable :active{
     opacity:.7;
   }
   .footer{
