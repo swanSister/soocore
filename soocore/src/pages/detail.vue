@@ -81,25 +81,31 @@
       <div class="flex content column" >
         <div class="flex none justify-content-start align-items-center add-title"> 승인 대기</div>
         <div class="flex" style="text-align:left;">
-          <div style="width:90%; margin-left:5%;">
+          <div style="width:90%; margin:0 auto;">
             <div class="flex column">
-              <div class="flex" v-for="i of 3" :key="'score-history'+i">
-                <div class="flex justify-content-start score-table-item" style="color:#595959;font-size:2vw;">
-                  2019.07.11 11:30
-
-                </div>
-                <div class="flex justify-content-start score-table-item" style="text-align:left; padding:2vw;">
-                  쑤 나 10 10 큐브 사주라 제발 승인해주세요 쑤느님
-                </div>
-                <div class="flex justify-content-center score-table-item clickable">
-                  <div class="flex none justify-content-center align-items-center" style="border-radius:3vw; width:10vw; height:10vw; background:#D8695E;">
-                    <div class="flex icon-ok" style="color:#ffffff; font-size:5vw;"></div>
+              <div class="flex align-items-center" v-for="i of 3" :key="'score-history'+i">
+                <div class="flex" style="padding-bottom:2vw;">
+                <div class="flex column">
+                  <div class="flex justify-content-start align-items-center score-table-item" style="margin-bottom:1vw; min-height:6vw; max-height:6vw;color:#595959;font-size:2vw;">
+                    2019.07.11 11:30
                   </div>
-                  
-                  <div class="flex none justify-content-center align-items-center" style="margin-left:2vw; border-radius:3vw; width:10vw; height:10vw; background:#595959;">
-                    <div class="flex icon-cancel" style="color:#ffffff; font-size:5vw;"></div>
+                  <div class="flex">쑤 나 10 10 큐브 사주라 제발 승인해주세요 쑤느님쑤 나 10 10 큐브 사주라 제발 승인해주세요 쑤느님</div>
+                </div>
+                <div class="flex column justify-content-start align-items-center score-table-item" style="text-align:left;">
+                   <div class="flex auto justify-content-end align-items-center score-table-item" style="margin-bottom:1vw; min-height:6vw; max-height:6vw; color:#D8695E;font-size:4vw;">
+                    10,000
+                  </div>
+                  <div class="flex auto justify-content-center align-items-center score-table-item clickable">
+                    <div class="flex none justify-content-center align-items-center icon-button">
+                      <div class="flex icon-ok"></div>
+                    </div>
+                    <div class="flex none justify-content-center align-items-center icon-button" style="margin-left:2vw; background:#595959;">
+                      <div class="flex icon-cancel"></div>
+                    </div>
                   </div>
                 </div>
+                </div>
+               
               </div>
             </div>
           </div>
@@ -113,24 +119,30 @@
       </div>
    </div>
   </div>
-  <div class="flex none footer justify-content-center align-items-center">
+  <div @click="isAddScorePopupShow=!isAddScorePopupShow" class="flex none footer justify-content-center align-items-center">
       <div class="flex auto red-button align-items-center" style="width:90%; padding:2vw 0;">
         점수 등록
     </div>
   </div>
+  <div v-if="isAddScorePopupShow" class="popup-bg" @click="isAddScorePopupShow=false"></div>
+  <add-score-popup v-if="isAddScorePopupShow" @confirm="isAddScorePopupShow=false"/>
+
 </div>
 
 </template>
 
 <script>
+
+import AddScorePopup from '@/components/add-score-popup'
 export default {
   name: 'add',
   components:{
-    
+    AddScorePopup,
   },
   data () {
     return {
       isScoreListShow:false,
+      isAddScorePopupShow:false,
     }
   },
   methods:{
@@ -214,6 +226,6 @@ export default {
 }
 .score-table-item{
   font-size:4vw;
-  padding:2vw 1vw;
+  padding:0 1vw;
 }
 </style>
