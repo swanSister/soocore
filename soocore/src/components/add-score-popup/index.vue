@@ -30,7 +30,7 @@
         </div>
         
       </div>
-      <div class="flex auto" style="width:100%;">
+      <div class="flex auto" style="width:100%; font-size:6vw;">
         <textarea style="width:100%;" placeholder="한 일을 입력해 주세요." type="text" rows="4" cols="50"/>
       </div>
       <div class="flex none footer justify-content-center align-items-center">
