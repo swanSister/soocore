@@ -4,16 +4,16 @@
       <div class="flex none align-items-center add-title" style="margin-bottom:2vw;"> 점수 </div>
       <div class="flex">
         <div class="flex none clickable">
-          <div @mouseup="onMouseUp(1)" @touchup="onMouseUp(1)" 
-          @mousedown="onMouseDown(1)" @touchdown="onMouseDown(1)" class="flex none justify-content-center align-items-center icon-button" style="border-radius:3vw 0 0 3vw;">
-            <div class="flex none icon-angle-down" style="font-size:6vw;"></div> 
+          <div @mouseup="onMouseUp(1, $event)" @touchup="onMouseUp(1, $event)" 
+          @mousedown="onMouseDown(1, $event)" @touchdown="onMouseDown(1, $event)" class="flex none justify-content-center align-items-center icon-button" style="width:12vw; height:12vw; border-radius:4vw 0 0 4vw;">
+            <div class="flex none icon-angle-down" style="font-size:8vw;"></div> 
           </div>
-          <input class="flex align-items-center" type="number" style="font-size:4vw; font-weight:bold;border:0.5vw solid #D8695E; border-width: 0.5vw 0 0.5vw 0; width:20vw; padding:0 1vw; outline:none;" v-model="point" @input="point = point<0 ? 0 : point>100000 ? 100000 : point">
+          <input class="flex align-items-center" type="number" style="color:#2D3642; font-size:8vw; font-weight:bold;border:0.5vw solid #D8695E; border-width: 0.5vw 0 0.5vw 0; width:40vw; padding:0 1vw; outline:none;" v-model="point" @input="point = point<0 ? 0 : point>100000 ? 100000 : point">
           
           <div
-          @mouseup="onMouseUp(2)" @touchup="onMouseUp(2)" 
-          @mousedown="onMouseDown(2)" @touchdown="onMouseDown(2)" class="flex none justify-content-center align-items-center icon-button" style="border-radius:0 3vw 3vw 0;">
-            <div class="flex none icon-angle-up" style="font-size:6vw;"></div>
+          @mouseup="onMouseUp(2, $event)" @touchup="onMouseUp(2, $event)" 
+          @mousedown="onMouseDown(2, $event)" @touchdown="onMouseDown(2, $event)" class="flex none justify-content-center align-items-center icon-button" style="width:12vw; height:12vw; border-radius:0 4vw 4vw 0;">
+            <div class="flex none icon-angle-up" style="font-size:8vw;"></div>
           </div>
         </div>
       </div>
@@ -82,7 +82,6 @@ export default {
   left:5%;
   top:20%;
   width:90%;
-  height:40%;
   background:#ffffff;
   box-shadow: 0 0 6px 0 rgba(33, 38, 46, 0.3);
   border-radius:2vw;
