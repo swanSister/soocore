@@ -45,7 +45,7 @@
         </div>
       </div>
       <div v-else class="flex content column" style="box-shadow:none;">
-        <div class="flex none align-items-center" style="margin:4vw;">
+        <div class="flex none align-items-center">
           <div class="flex none circle-small justify-content-center align-items-center" :style="{
               background:role == 1 ? '#D8695E' : '#F2D677'
             }">
@@ -54,9 +54,9 @@
           <div class="flex none" style="width:30%;margin-left:4vw;">
            김민수
           </div>
-          <div @click="isSigniturePopupShow=!isSigniturePopupShow" class="flex none" style="position:relative; width:50%; border-radius:2vw;">
+          <div @click="isSigniturePopupShow=!isSigniturePopupShow" class="flex none" style="position:relative; width:40%; height:auto; border-radius:2vw;">
             <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); color:#595959; font-size:4vw; opacity:0.5;">서명</div>
-            <img :src="signitureData" class="flex align-items-center " style=" width:100%;"/>
+            <img :src="signitureData" class="flex align-items-center " style=" width:100%; height:100%;"/>
           </div>
         </div>
 
@@ -79,7 +79,7 @@ import SigniturePopup from '@/components/signiture-popup'
 export default {
   name: 'add',
   components:{
-    SigniturePopup
+    SigniturePopup,
   },
   data () {
     return {
@@ -95,24 +95,21 @@ export default {
   },
   methods:{
     onMouseMove(e){
-      e.stopPropagation()
       if(this.isMouseDown){
         if(!this.lastTimeStamp || (e.timeStamp - this.lastTimeStamp) > this.timeThreshold){
           let x = (e.clientX || e.touches[0].clientX) - this.rect.x
           let left = parseInt(x*100/this.rect.width)
-          left = left < 0 ? 0 : left > 100 ? 100 : left
           left += 5
           left -= left%5
+          left = left < 0 ? 0 : left > 100 ? 100 : left
           this.$refs.scoreSelector.style.left= `${left}%`
           this.goalScore = 1000*left
         }
       }
     },
     onMouseDown(e){
-      //e.preventDefault()
       let target = e.target
         while (target){
-          console.log(target.id)
           if(target.id && target.id == "scoreSelector"){
             this.rect = this.$refs.scoreSelectorBg.getBoundingClientRect()
             this.lastTimeStamp = e.timeStamp
@@ -155,7 +152,6 @@ export default {
   overflow: hidden;
 }
 .circle{
-  cursor: pointer;
   width:20vw;
   height:20vw;
   font-size:10vw;
@@ -164,7 +160,6 @@ export default {
   margin-right:2vw;
 }
 .circle-small{
-  cursor: pointer;
   width:10vw;
   height:10vw;
   font-size:5vw;
@@ -172,7 +167,7 @@ export default {
   color:#ffffff;
   margin-left:4vw;
 }
-.circle:active{
+.circle:after{
   opacity:.7;
 }
 .score-selector-bg{
@@ -210,22 +205,6 @@ export default {
   transform: translate(-50%,0);
   color:#595959;
 }
-textarea{
-	border-radius: 2vw;
-	outline: none;
-	padding: 2vw;
-	font-size: 4vw;
-	color: #595959;
-  border: solid 0.8vw #D9D9D9;
-  font-weight: bold;
-  margin-right:5%;
-}
-input:focus, textarea:focus{
-	border: solid 0.8vw #D8695E;	
-}
-textarea{
-	overflow: auto;
-}
 .add-title{
   box-shadow: 1px 1px 1px 0 rgba(33, 38, 46, 0.3);
   font-size: 6vw;
@@ -238,6 +217,5 @@ textarea{
   color:#D8695E;
   font-size:6vw;
   font-weight: bold;
-
 }
 </style>
