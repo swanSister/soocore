@@ -48,25 +48,15 @@
             </div>
             <span @click="isScoreListShow = !isScoreListShow" :class="isScoreListShow ? 'icon-angle-up' : 'icon-angle-down' " style="color:#595959; font-size:6vw;"></span>
             <div v-if="isScoreListShow" style="width:90%; margin-left:5%;">
-              <div class="flex" style="padding:2vw 0;box-shadow: 0 1px 0 0 rgba(33, 38, 46, 0.3);">
-                <div class="flex none justify-content-start score-table-header" style="width:30%;">
-                  시간
-                </div>
-                <div class="flex none justify-content-start score-table-header" style="width:50%;">
-                  한 일
-                </div>
-                <div class="flex none justify-content-start score-table-header" style="width:20%;">
-                  점수
-                </div>
-              </div>
-              <div class="nano" style="margin:0 auto;width:100%;height:50vw;">
+  
+              <div class="nano" style="margin:0 auto;width:100%;height:50vw; box-shadow: 0 -1px 0 0 rgba(33, 38, 46, 0.3);">
                 <div class="nano-content">
                   <div class="flex column">
-                    <div class="flex" v-for="i of 10" :key="'score-history'+i">
+                    <div class="flex" v-for="i of 10" :key="'score-history'+i" style="margin-top:2vw;">
                       <div class="flex none justify-content-start score-table-item" style="color:#595959; width:30%; font-size:2vw;">
                         2019.07.11 11:30
                       </div>
-                      <div class="flex none justify-content-start score-table-item" style="width:50%; text-align:left; padding:2vw;">
+                      <div class="flex none justify-content-start score-table-item" style="width:50%; text-align:left; padding:0 2vw;">
                         집에서 밥먹고 개똥치우고 설거지하고 빨래 돌리고 건조 돌리고 찰스랑 산책도 갔다왔다.
                       </div>
                       <div class="flex none justify-content-start score-table-item" style="color:#D8695E; width:20%;">
