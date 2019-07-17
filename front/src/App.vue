@@ -10,9 +10,8 @@ import "@/assets/css/main.css"
 import "@/assets/css/fontello.css"
 import SubHeader from "@/components/sub-header"
 Vue.component('sub-header',SubHeader)
-export default {
-  name: 'App',
-  
+export default{
+  name:'soocore'
 }
 </script>
 

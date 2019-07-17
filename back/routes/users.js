@@ -3,7 +3,6 @@ var router = express.Router()
 const sql = require('../query.js')
 
 router.post('/login', function(req, res){
-
 	var param='';
     req.on('data', function(data) {
       param += data;
@@ -36,8 +35,19 @@ router.post('/login', function(req, res){
 			res.status(500).json({message:'server error!'})
 			return true
 		}
-	  });
-});
+	  })
+})
+
+router.get('/kakaoUserInfo',function(req, res){
+	if (!req.headers.authorization) {
+    return res.status(403).json({ error: 'No credentials sent!' });
+	}
+	console.log(req.headers.authorization)
+})
+
+
+
+
 
 
 module.exports = router;
