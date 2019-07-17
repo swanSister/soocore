@@ -1,21 +1,37 @@
 <template>
-  <div>
-   login
+  <div id="app">
+    <KakaoLogin
+      api-key="9722190d232d6bdad6cade31c9b8b0bb"
+      image="kakao_login_btn_large"
+      :on-success=onSuccess
+      :on-failure=onFailure
+      />
   </div>
 </template>
-
+ 
 <script>
+import KakaoLogin from 'vue-kakao-login'
+ 
+let onSuccess = (data) => {
+  console.log(data)
+  console.log("success")
+}
+let onFailure = (data) => {
+  console.log(data)
+  console.log("failure")
+}
+ 
 export default {
-  name: 'login',
-  data () {
-    return {
-     
-    }
+  name: 'App',
+  components: {
+    KakaoLogin
+  },
+  methods: {
+    onSuccess,
+    onFailure
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
+ 
+<style>
 </style>
