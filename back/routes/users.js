@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router()
+var request = require('request');
 const sql = require('../query.js')
 
 router.post('/login', function(req, res){
@@ -41,6 +42,17 @@ router.post('/login', function(req, res){
 router.get('/kakaoUserInfo',function(req, res){
 	if (!req.headers.authorization) {
     return res.status(403).json({ error: 'No credentials sent!' });
+	}else{
+		request({
+			headers: {
+				'Authorization': req.headers.authorization
+			},
+			uri: 'https://kapi.kakao.com/v2/user/me',
+			method: 'GET'
+		}, function (err, res2, body) {
+			console.log(body.toString())
+			res.status(200).json(JSON.parse(body));
+		});
 	}
 	console.log(req.headers.authorization)
 })
