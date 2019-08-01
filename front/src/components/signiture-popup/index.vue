@@ -81,15 +81,11 @@ export default {
 </script>
 <style scoped>
 .signiture-popup{
-  position:fixed;
-  left:5%;
-  top:20%;
-  width:90%;
-  height:40%;
   background:#ffffff;
   box-shadow: 0 0 6px 0 rgba(33, 38, 46, 0.3);
   border-radius:2vw;
   overflow: hidden;
+  z-index: 10;
 }
 .canvas-content{
   border:0.5vw solid rgba(33, 38, 46, 0.3);
