@@ -30,10 +30,10 @@
         
       </div>
       <div class="flex auto" style="width:100%; font-size:6vw;">
-        <textarea style="width:100%;" placeholder="한 일을 입력해 주세요." type="text" rows="4" cols="50"/>
+        <textarea style="width:100%;" v-model="todo" placeholder="한 일을 입력해 주세요." type="text" rows="4" cols="50"/>
       </div>
       <div class="flex none footer justify-content-center align-items-center">
-       <div class="flex none red-button align-items-center" style="font-size:6vw; margin-top:4vw;width:60%; padding:2vw 0;">
+       <div @click="onConfirm" class="flex none red-button align-items-center" style="font-size:6vw; margin-top:4vw;width:60%; padding:2vw 0;">
           {{role==1 ? '점수 등록' : '점수 요청'}}
       </div>
     </div>
@@ -47,7 +47,8 @@ export default {
     return {
       role:1,
       point:500,
-      mouseDownInterval:null
+      mouseDownInterval:null,
+      todo:'',
     }
   },
   methods:{
@@ -55,6 +56,9 @@ export default {
       if(type==1){ this.point-=100}
       else{ this.point+=100 }
       this.point = this.point < 0 ? 0 : this.point>100000 ? 100000 : this.point
+    },
+    onConfirm(){
+      this.$emit('confirm',{score:this.point, todo:this.todo})
     },
    
   },
@@ -73,6 +77,7 @@ export default {
   box-shadow: 0 0 6px 0 rgba(33, 38, 46, 0.3);
   border-radius:2vw;
   overflow: hidden;
+  z-index: 5;
 }
 .circle{
   width:8vw;

@@ -8,10 +8,12 @@ import Add from '@/pages/add'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
       name: 'login',
+      props: (route) => ({ query: route.query.q }),
       component: Login
     },
     {
