@@ -149,6 +149,12 @@ router.post('/delete',function(req, res){
 				res.status(403).send({message:'mysql error'})
 				return true
 			}else{
+				let q2 = `DELETE FROM score WHERE sectionId='${d.id}'`
+				sql(q2, function(error, results, fields){
+					if(error){
+						console.error(error.message)
+					}
+				})
 				fs.exists(`./uploads/${d.id}_a.png`, function(exists) {
 					if(exists) {
 						fs.unlink(`./uploads/${d.id}_a.png`, function(err){
@@ -172,8 +178,6 @@ router.post('/delete',function(req, res){
 						console.log("not found file@@@!!!@!@!@!@!@");
 					}
 				})
-		
-
 				res.status(200).json({code:'success'});
 			}
 		})

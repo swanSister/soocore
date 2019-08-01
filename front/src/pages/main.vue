@@ -165,7 +165,6 @@ export default {
         this.selectedSectionId = section.id
         this.isDeletePopupShow = true
       }
-
     },
   },
   mounted(){
