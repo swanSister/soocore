@@ -9,10 +9,20 @@ router.use(express.json())
 router.post('/login', function(req, res){
 	res.status(200).send('hello world')
 })
-
+router.get('/kakaoLogin',function(req, res){
+	request({
+		headers: {
+			'Authorization': req.headers.authorization
+		},
+		uri: `https://kauth.kakao.com/oauth/authorize?client_id=1f659f67d32a4285ede1c90ac0d2db4b&redirect_uri=https://soocore.com&response_type=code`,
+		method: 'GET'
+	}, function (err, res2, body) {
+		res.status(200).json({code:'success', uri : res2.request.uri.href})
+	});
+}),
 router.get('/kakaoUserInfo',function(req, res){
 	if (!req.headers.authorization) {
-    return res.status(403).json({ error: 'No credentials sent!' });
+    	return res.status(403).json({ error: 'No credentials sent!' });
 	}else{
 		request({
 			headers: {
@@ -21,6 +31,7 @@ router.get('/kakaoUserInfo',function(req, res){
 			uri: 'https://kapi.kakao.com/v2/user/me',
 			method: 'GET'
 		}, function (err, res2, body) {
+			console.log(body)
 			let d = JSON.parse(body)
 			let q = `INSERT INTO users (id, name, phoneNumber, loginType) 
 			VALUES ('${d.id.toString()}', '${d.properties.nickname}', '', 'kakao') 
@@ -104,25 +115,21 @@ router.post('/getKakaoFriends',function(req, res){
 	}
 })
 router.post('/getKakaoTokenByCode',function(req, res){
-	if (!req.headers.authorization) {
-    return res.status(403).json({ error: 'No credentials sent!' });
-	}else{
-		let d = {}
-		d.grant_type = "authorization_code"
-		d.client_id = "1f659f67d32a4285ede1c90ac0d2db4b"
-		d.redirect_uri = "https://soocore.com"
-		d.code = req.body.code
-		console.log(d)
-		request({
-			uri: 'https://kauth.kakao.com/oauth/token',
-			method: 'POST',
-			form: d
-		}, function (err, res2, body2) {
-			body2 = JSON.parse(body2)
-			console.log("#######token by code res", body2.access_token)
-			res.status(200).json({kakaoToken:body2.access_token, kakaoTokenRefresh : body2.refresh_token})
-		})
-	}
+	let d = {}
+	d.grant_type = "authorization_code"
+	d.client_id = "1f659f67d32a4285ede1c90ac0d2db4b"
+	d.redirect_uri = "https://soocore.com"
+	d.code = req.body.code
+	console.log(d)
+	request({
+		uri: 'https://kauth.kakao.com/oauth/token',
+		method: 'POST',
+		form: d
+	}, function (err, res2, body2) {
+		body2 = JSON.parse(body2)
+		console.log("#######token by code res", body2.access_token)
+		res.status(200).json({kakaoToken:body2.access_token, kakaoTokenRefresh : body2.refresh_token})
+	})
 })
 router.post('/refreshKakaoToken',function(req, res){
 	if (!req.headers.authorization) {
@@ -132,7 +139,7 @@ router.post('/refreshKakaoToken',function(req, res){
 		d.grant_type = "refresh_token"
 		d.client_id = "1f659f67d32a4285ede1c90ac0d2db4b"
 		d.refresh_token = req.body.kakaoTokenRefresh
-		console.log(d)
+		console.log("######d:",d)
 		request({
 			uri: 'https://kauth.kakao.com/oauth/token',
 			method: 'POST',

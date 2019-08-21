@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { setTimeout } from 'timers';
 export default {
   data () {
     return {
@@ -68,14 +69,21 @@ export default {
         that.isMouseDown = false
         that.lastTimeStamp = 0
       },50)
-    }
+    },
+    createCanvas(){
+      this.canvasWidth = this.$refs.canvasContent.getBoundingClientRect().width
+      this.canvasHeight = this.$refs.canvasContent.getBoundingClientRect().height
+      this.canvasRect = this.$refs.canvas.getBoundingClientRect()
+      this.ctx = this.$refs.canvas.getContext("2d")
+      this.resetCanvas()
+    },
   },
   mounted(){
-    this.canvasWidth = this.$refs.canvasContent.getBoundingClientRect().width
-    this.canvasHeight = this.$refs.canvasContent.getBoundingClientRect().height
-    this.canvasRect = this.$refs.canvas.getBoundingClientRect()
-    this.ctx = this.$refs.canvas.getContext("2d")
-    this.resetCanvas()
+    let that = this
+    setTimeout(function(){
+     that.createCanvas()
+    },300)
+    
   }
 }
 </script>

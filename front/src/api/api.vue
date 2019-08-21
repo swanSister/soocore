@@ -8,6 +8,9 @@ export default {
   install(Vue, options){
     ctx.store = options.store
   },
+  kakaoLogin:function(){
+    return axios.get(`${API_URL}/users/kakaoLogin`)
+  },
   sendKakaoMessage:function(sendData){
     let param = {kakaoToken: ctx.store.state.kakaoToken, data:sendData}
     return axios.post(`${API_URL}/users/sendKakaoMessage`,param,{

@@ -5,9 +5,10 @@ import App from './App'
 import router from './router'
 import store from './store'
 import api from './api/api'
-
+import eventBus from './eventBus'
+console.log(eventBus)
 Vue.use(require('vue-moment'))
-
+Vue.prototype.$eventBus = eventBus
 Vue.prototype.$api = api
 Vue.prototype.$store = store
 Vue.use(api,{
