@@ -1,17 +1,13 @@
 <template>
   <div class="flex auto column">
-    <div class="title">soocore</div>
-
-    <a ref="kakaoLoginBtn" id="kakao-login-btn" style="margin-top:8vw;"></a>
-
+    <div class="title">soocore {{$store.state.mode}}</div>
+    <img @click="kakaoLogin" src="../assets/kakao-login-button.png" style="margin-left:10%; width:80%; margin-top:8vw;"/>
   </div>
 </template>
 <script>
-import KakaoLogin from 'vue-kakao-login'
 import axios from 'axios'
 export default {
   components: {
-    KakaoLogin
   },
   data () {
     return {
@@ -22,11 +18,10 @@ export default {
     onSuccess(data){
       console.log(data.access_token)
       this.$store.commit('kakaoToken', data.access_token)
-      this.$store.commit('kakaoTokenRefresh', data.refresh_token)
+      if(data.refresh_token){
+        this.$store.commit('kakaoTokenRefresh', data.refresh_token)
+      }
       this.getUserInfo(data.access_token)
-    },
-    onFailure(data){
-      console.log("####onfailuer")
     },
     async getUserInfo(token){
       try{
@@ -45,31 +40,48 @@ export default {
         console.error(e.message)
       }
     },
-    kakaoLogin(){
-      Kakao.Auth.createLoginButton({
-        container: this.$refs.kakaoLoginBtn,
-        success: this.onSuccess,
-        fail: this.onFailure
-      });
+    async kakaoLogin(){
+      this.$eventBus.$emit("showLoading")
+      let res = await this.$api.kakaoLogin()
+      if(res.data.code=='success'){
+        window.location.href = res.data.uri
+      }
+      this.$eventBus.$emit("hideLoading")
     }
   },
   async mounted(){
-    this.kakaoLogin()
-    if(this.$route.query.id){
+    this.$eventBus.$emit("showLoading")
+    if(this.$route.query.id && this.$store.state.accessToken &&  this.$store.state.kakaoToken){
       this.isInvite = true
-      if(this.$store.state.accessToken &&  this.$store.state.kakaoToken){
-        this.$router.push({ name: 'invite', query: { id: this.$route.query.id }})
+      this.$router.push({ name: 'invite', query: { id: this.$route.query.id }})
+    }else if(this.$route.query.sectionId && this.$store.state.accessToken &&  this.$store.state.kakaoToken){
+      this.$router.push({name:'detail', query: { id: this.$route.query.sectionId }})
+    }else if(window.location.href.indexOf('code=')>0){
+      let code = window.location.href.split('code=')[1]
+      code = code.slice(0,code.length-2)
+      console.log(code)
+      let res =  await this.$api.getKakaoTokenByCode(code)
+      if(!res.data.kakaoToken){
+        window.location.href = "https://soocore.com/#/"
+        return
       }
-    }else if(this.$route.query.code){
-      let res =  await this.$api.getKakaoTokenByCode(this.$route.query.code)
-      console.log("####newtoken", res.data.kakaoToken)
+      console.log(res.data)
       this.$store.commit('kakaoToken', res.data.kakaoToken)
-      this.$router.push({name:'main'})
+      if(res.data.kakaoTokenRefresh){
+        this.$store.commit('kakaoTokenRefresh', res.data.kakaoTokenRefresh)
+      }
+      
+      if(!this.$store.state.accessToken){
+        this.getUserInfo(res.data.kakaoToken)
+      }else{
+        this.$router.push({name:'main'})
+      }
     }else{
       if(this.$store.state.accessToken &&  this.$store.state.kakaoToken){
         this.$router.push('main')
       }
     }
+    this.$eventBus.$emit("hideLoading")
   }
 }
 </script>

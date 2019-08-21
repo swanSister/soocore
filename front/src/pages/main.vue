@@ -5,12 +5,24 @@
       <div class="flex icon-plus" style="font-size:30vw; color:#D8695E;"></div>
     </div>
     <template v-else>
-      <div class="nano" style="height:calc(100% - 38vw);">
-        <div class="nano-content">
-          <div style="margin:0 auto; width:90%; margin-bottom:4vw;">
-              <div
+      <div class="flex none" style="widthL100%; height:20vw; padding:0 4vw; border-bottom:1vw dashed rgba(33, 38, 46, 0.3);">
+        <div class="flex auto align-items-center">
+          <input class="search-input" style="height:10vw;" placeholder="검색"/>
+          <div class="flex none search-icon justify-content-center align-items-center" style="height:10vw; width:10vw;">
+            <div class="icon-search" style="font-size:6vw; color:#ffffff;"></div>
+          </div>
+        </div>
+        <div @click="$router.push('add')" class="flex auto align-items-center">
+          <div class="flex auto icon-plus justify-content-center" style="font-size:10vw; color:#D8695E;"></div>
+        </div>
+      </div>
+      <div class="nano flex auto">
+        <div @scroll="onScroll" class="nano-content">
+          <div style="margin:0 auto; width:90%; margin-bottom:4vw; padding-top:4vw;">
+            <div
+              :id="`mainSection${section.id}`"
               @mousedown="onMouseDown($event,section)" @mouseup="onMouseUp($event,section)" @touchstart="onMouseDown($event,section)" @touchend="onMouseUp($event,section)" 
-              class="flex none column justifh-content-center content" v-for="(section,index) of sectionList" :key="'main-list'+index" style="position:relative;"> 
+              class="flex none column justifh-content-center content" v-for="(section,index) of sectionList.slice((currentPage-1)*pageSize, (currentPage-1)*pageSize+pageSize)" :key="'main-list'+index" style="position:relative;"> 
                 <div class="flex">
                   <div class="flex auto justify-content-start align-items-center">
                     <div class="flex none circle justify-content-center align-items-center">갑</div>
@@ -65,10 +77,15 @@
           </div>
         </div>
       </div>
-      <div @click="$router.push('add')" class="flex none footer justify-content-center align-items-center">
-        <div class="flex auto red-button align-items-center" style="width:90%; padding:2vw 0;">
-            추가
-        </div>
+    
+      <div class="flex none justify-content-center align-items-center" style="height:14vw;">
+        <div @click="leftPage" class="flex none icon-angle-left" style="font-weight:bold; color:#595959; font-size:8vw;" :style="{
+          opacity:currentPage>1 ? 1 : 0.4
+          }"></div>
+        <div class="flex none justify-content-center white-button" style="width:10vw; height:10vw; border-radius:2vw; font-size:6vw;">{{currentPage}}</div>
+        <div @click="rightPage" class="flex none icon-angle-right" style="font-weight:bold; color:#595959; font-size:8vw;" :style="{
+          opacity: (currentPage*pageSize < sectionList.length) ? 1 : 0.4
+          }"></div>
       </div>
     </template>
 
@@ -92,6 +109,9 @@ export default {
       mouseDownTimestamp:0,
       selectedSectionId:null,
       isDeletePopupShow:false,
+      pageSize:5,
+      currentPage:1,
+      isMouseDown:false,
     }
   },
   components:{
@@ -122,8 +142,11 @@ export default {
         description: '초대장이 도착했습니다!',
         imageUrl: 'https://api.soocore.com/uploads/soocore',
         link: {
-          mobileWebUrl: 'http://soocore.com/login?id='+id,
-          webUrl: 'http://soocore.com/login?id='+id,
+          mobileWebUrl: 'http://soocore.com/#/login?id='+id,
+          webUrl: 'http://soocore.com/#/login?id='+id,
+          // androidExecParams:'id='+id,
+          // iosExecParams:'id='+id,
+
         }
       },
     });
@@ -137,26 +160,36 @@ export default {
       let res = await this.$api.getKakaoFrinds()
       console.log(res.data)
       if(res.data.code == -402){
-        window.open(res.data.uri)
+        window.location.href = res.data.uri
       }else if(res.data.code == -401){
         let res = await this.$api.refreshKakaoToken()
         console.log("#######refreshKakaoToken Res", res)
-        if(! res.data.kakaoToken || !res.data.kakaoTokenRefresh){
+        if(!res.data.kakaoToken){
           this.$store.commit('me', '')
           this.$store.commit('kakaoToken', '')
-          this.$store.commit('kakaoTokenRefresh', '')
+          if(res.data.kakaoTokenRefresh){
+            this.$store.commit('kakaoTokenRefresh', res.data.kakaoTokenRefresh)
+          }
           this.$store.commit('accessToken', '')
           this.$router.push({ name: 'login'})
         }else{
           this.$store.commit('kakaoToken', res.data.kakaoToken)
-          this.$store.commit('kakaoTokenRefresh', res.data.kakaoTokenRefresh)
+          if(res.data.kakaoTokenRefresh){
+            this.$store.commit('kakaoTokenRefresh', res.data.kakaoTokenRefresh)
+          }
         }
       }
     },
     onMouseDown(e, section){
+      this.isMouseDown = true
+      document.getElementById(`mainSection${section.id}`).style.background="rgba(33, 38, 46, 0.1)"
       this.mouseDownTimestamp = e.timeStamp
     },
     onMouseUp(e, section){
+      e.stopPropagation()
+      e.preventDefault()
+      if(!this.isMouseDown)return
+      document.getElementById(`mainSection${section.id}`).style.background="#ffffff"
       if(parseInt(e.timeStamp - this.mouseDownTimestamp) <= 300 ){
         if(section.isCreate) this.$router.push({name:'detail', query: { id: section.id }})
         else this.sendKakaoLink(section.id)
@@ -166,29 +199,40 @@ export default {
         this.isDeletePopupShow = true
       }
     },
-  },
-  mounted(){
-    if(!this.$store.state.kakaoToken || !this.$store.state.kakaoTokenRefresh){
-      this.$store.commit('me', '')
-      this.$store.commit('kakaoToken', '')
-      this.$store.commit('kakaoTokenRefresh', '')
-      this.$store.commit('accessToken', '')
-      this.$router.push({ name: 'login'})
-      return
+    leftPage(){
+      console.log(this.currentPage)
+      if(this.currentPage<=1)return
+      this.currentPage--
+    },
+    rightPage(){
+      console.log(this.currentPage)
+      if((this.currentPage)*this.pageSize >= this.sectionList.length) return
+      this.currentPage++
+    },
+    onScroll(){
+      console.log("onscroll")
+      this.isMouseDown = false
     }
+  },
+  async mounted(){
+    this.$eventBus.$emit("showLoading")
+    await this.getSections()
+    await this.getKakaoFrinds()
+    this.$eventBus.$emit("hideLoading")
     $(".nano").nanoScroller()
-    this.getSections()
-    this.getKakaoFrinds()
-  }
+  },
 }
 </script>
 
 <style scoped lang="scss">
 .content{
-  margin-top:4vw;
+  margin-bottom:4vw;
   border-radius:2vw;
   box-shadow: 0 0 6px 0 rgba(33, 38, 46, 0.3);
   background-color: #ffffff;
+  &:first-child{
+    margin-top:1vw;
+  }
   &:last-child{
     margin-bottom:12vw;
   }

@@ -92,10 +92,10 @@
                     <div class="flex auto justify-content-center align-items-center score-table-item clickable">
                       <template v-if="role==1">
                         <div class="flex none justify-content-center align-items-center icon-button">
-                          <div @click="approveScore({id:score.id, sectionId:score.sectionId})" class="flex icon-ok"></div>
+                          <div @click="approveScore({id:score.id, sectionId:score.sectionId},score)" class="flex icon-ok"></div>
                         </div>
                         <div class="flex none justify-content-center align-items-center icon-button" style="margin-left:2vw; background:#595959;">
-                          <div @click="deleteScore({id:score.id, sectionId:score.sectionId})" class="flex icon-cancel"></div>
+                          <div @click="deleteScore({id:score.id, sectionId:score.sectionId},score)" class="flex icon-cancel"></div>
                         </div>
                       </template>
                       <template v-else>
@@ -153,7 +153,7 @@
     </div>
   </div>
   <div v-if="isAddScorePopupShow || isSendMessagePopupShow" class="popup-bg" @click="isAddScorePopupShow=false, isSendMessagePopupShow=false"></div>
-  <add-score-popup v-if="isAddScorePopupShow" @confirm="createScore($event)"/>
+  <add-score-popup v-if="isAddScorePopupShow" @confirm="createScore($event)" :name="section.b_name" />
   <yes-no-popup v-if="isSendMessagePopupShow" @confirm="sendMessage" @cancel="isSendMessagePopupShow=false">
     <div class="flex column auto justify-content-center">
       <div class="flex align-items-center">{{role==1 ? section.b_name : section.a_name}} 님께 메세지를 보내시겠습니까?</div>
@@ -207,11 +207,16 @@ export default {
       this.isAddScorePopupShow=false
       this.isSendMessagePopupShow = true
       if(this.role==1) {
-        this.kakaoMessageDesc = `"${data.todo}" ${data.score}점 승인합니다. `
+        this.kakaoMessageDesc = `"${data.todo}" ${data.score}점 승인 되었습니다. `
       }
       else if(this.role==2){
         this.kakaoMessageDesc = `"${data.todo}" ${data.score}점 결재 요청합니다. `
       }
+      this.$eventBus.$emit("showToast",{
+        type:true,
+        title:'성공',
+        content:this.kakaoMessageDesc
+      })
       this.loadData()
     },
     async getSectionDetail(){
@@ -227,19 +232,32 @@ export default {
       let res = await this.$api.getWaitScore({sectionId: this.$route.query.id})
       this.waitScores = res.data.data
     },
-    async approveScore(data){
+    async approveScore(data, score){
       let res = await this.$api.approveScore(data)
       console.log("###approve res,",res)
       this.loadData()
-      this.kakaoMessageDesc = `"${data.todo}" ${data.score}점 승인합니다. `
+      this.kakaoMessageDesc = `"${score.todo}" ${score.score}점 승인 되었습니다. `
       this.isSendMessagePopupShow = true
+
+      this.$eventBus.$emit("showToast",{
+        type:true,
+        title:'성공',
+        content:this.kakaoMessageDesc
+      })
       
     },
-    async deleteScore(data){
+    async deleteScore(data, score){
       let res = await this.$api.deleteScore(data)
       this.loadData()
-      this.kakaoMessageDesc = `"${data.todo}" ${data.score}점 거절합니다. `
+      this.kakaoMessageDesc = `"${score.todo}" ${score.score}점 거절 했습니다. `
       this.isSendMessagePopupShow = true
+
+      this.$eventBus.$emit("showToast",{
+        type:true,
+        title:'성공',
+        content:this.kakaoMessageDesc
+      })
+      
     },
     async loadData(){
       this.getSectionDetail()
@@ -251,19 +269,24 @@ export default {
       let res = await this.$api.getKakaoFrinds()
       console.log(res.data)
       if(res.data.code == -402){
-        window.open(res.data.uri)
+        window.location.href = res.data.uri
       }else if(res.data.code == -401){
         let res = await this.$api.refreshKakaoToken()
         console.log("#######refreshKakaoToken Res", res)
-        if(! res.data.kakaoToken || !res.data.kakaoTokenRefresh){
+        if(!res.data.kakaoToken){
           this.$store.commit('me', '')
           this.$store.commit('kakaoToken', '')
+          if(res.data.kakaoTokenRefresh){
+            this.$store.commit('kakaoTokenRefresh', res.data.kakaoTokenRefresh)
+          }
           this.$store.commit('kakaoTokenRefresh', '')
           this.$store.commit('accessToken', '')
           this.$router.push({ name: 'login'})
         }else{
           this.$store.commit('kakaoToken', res.data.kakaoToken)
-          this.$store.commit('kakaoTokenRefresh', res.data.kakaoTokenRefresh)
+          if(res.data.kakaoTokenRefresh){
+            this.$store.commit('kakaoTokenRefresh', res.data.kakaoTokenRefresh)
+          }
         }
       }
       let targetId = ''
@@ -277,19 +300,29 @@ export default {
             object_type: "text",
             text:this.kakaoMessageDesc,
             link: {
-              web_url: "http://soocore.com",
-              mobile_web_url: "http://soocore.com",
+              web_url: `http://soocore.com/#/?sectionId=${this.$route.query.id}`,
+              mobile_web_url: `http://soocore.com/#/?sectionId=${this.$route.query.id}`,
+              // android_execution_params:'sectionId='+this.$route.query.id,
+              // ios_execution_params:'sectionId='+this.$route.query.id,
             },
             button_title:"확인"
-        }
+          }
         })
         console.log(res2)
+      }else{
+        this.$eventBus.$emit("showToast",{
+          type:false,
+          title:'실패',
+          content:'카카오톡 친구를 찾을 수 없습니다.'
+        })
       }
     },
   },
-  mounted(){
+  async mounted(){
+      this.$eventBus.$emit("showLoading")
+      await this.loadData()
       $(".nano").nanoScroller()
-      this.loadData()
+      this.$eventBus.$emit("hideLoading")
   },
   destroyed(){
  

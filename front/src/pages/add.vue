@@ -156,6 +156,7 @@ export default {
       this.isSigniturePopupShow = false
     },
     async createSection(){
+      this.$eventBus.$emit("showLoading")
       console.log(this.sectionData)
       let pre = ''
       if(this.sectionData.role == 1){
@@ -173,6 +174,13 @@ export default {
       let res2 = await this.$api.signUpload(blob,fileName)
       this.sendKakaoLink(id)
       this.$router.go(-1)
+      this.$eventBus.$emit("hideLoading")
+      
+      this.$eventBus.$emit("showToast",{
+        type:true,
+        title:'성공',
+        content:'계약을 생성했습니다.'
+      })
     },
     sendKakaoLink(id){
       console.log(id)
@@ -183,8 +191,10 @@ export default {
         description: '초대장이 도착했습니다!',
         imageUrl: 'https://api.soocore.com/uploads/soocore',
         link: {
-          mobileWebUrl: 'http://soocore.com/login?id='+id,
-          webUrl: 'http://soocore.com/login?id='+id,
+          mobileWebUrl: 'http://soocore.com/#/login?id='+id,
+          webUrl: 'http://soocore.com/#/login?id='+id,
+          // androidExecParams:'id='+id,
+          // iosExecParams:'id='+id,
         }
       },
     })

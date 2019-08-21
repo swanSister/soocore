@@ -123,26 +123,37 @@ export default {
         this.isSigniturePopupShow = false
       },
       async acceptSection(){
+        this.$eventBus.$emit("showLoading")
         let res = await this.$api.acceptSections(this.section)
         console.log(res)
         let pre = this.role == 1 ? '_a' : '_b'
         let fileName = this.section.id+pre
         var blob = dataURItoBlob(this.signitureData)
         let res2 = await this.$api.signUpload(blob,fileName)
-
+        this.$eventBus.$emit("hideLoading")
         this.$router.push('main')
+        this.$eventBus.$emit("showToast",{
+          type:false,
+          title:'성공',
+          content:'계약이 생성되었습니다.'
+        })
       },
       async getInvitedSection(){
+        this.$eventBus.$emit("showLoading")
         let res = await this.$api.getInvitedSection({id:this.$route.query.id})
         this.section = res.data.data[0]
         if(this.section.isCreate){
-          alert("이미 수락된 요청입니다.")
+          this.$eventBus.$emit("showToast",{
+            type:false,
+            title:'실패',
+            content:'이미 수락된 요청입니다.'
+          })
           this.$router.push('main')
         }
         this.role = this.section.a_id ? 2 : 1 
         if(this.role ==1 ) this.section.a_name = this.$store.state.me.name
         else this.section.b_name = this.$store.state.me.name
-        console.log(this.section)
+        this.$eventBus.$emit("hideLoading")
       },
       getScoreLeft(goal,score){
       let per  = parseInt(score*100/goal)
